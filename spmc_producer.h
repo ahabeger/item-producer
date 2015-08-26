@@ -13,6 +13,7 @@ typedef struct producer_struct producer_t;
  * initializes the producer
  * items buffered - the # of items in the internal queue
  * producer_func - the source for the items to be produced
+ *      user supplied function, required to return true when an item is produced, return false when items have ended
  * sturcture - a data structure that can be passed and utilized by producer_func
  */
 producer_t* spmc_producer_new (size_t items_buffered, producer_func_t* producer_func, void* structure);
