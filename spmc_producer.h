@@ -11,9 +11,9 @@ typedef struct producer_struct producer_t;
 
 /**
  * initializes the producer
- * genaric_producer
  * items buffered - the # of items in the internal queue
  * producer_func - the source for the items to be produced
+ * sturcture - a data structure that can be passed and utilized by producer_func
  */
 producer_t* spmc_producer_new (size_t items_buffered, producer_func_t* producer_func, void* structure);
 
@@ -24,7 +24,9 @@ producer_t* spmc_producer_new (size_t items_buffered, producer_func_t* producer_
  */ 
 void spmc_producer_start (producer_t* producer);
 
-
+/**
+ * consumers check in with the respective producer, every consumer *must* check in before consuming
+ */
 void spmc_producer_consumer_check_in (producer_t* producer);
 
 /**
@@ -34,7 +36,9 @@ void spmc_producer_consumer_check_in (producer_t* producer);
  */ 
 bool spmc_producer_get_item (producer_t* producer, void** item);
 
-
+/**
+ * consumers check out with the respective producer, every consumer *must* check out upon completion
+ */
 void spmc_producer_consumer_check_out (producer_t* producer);
 
 /**
